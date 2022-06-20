@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Police Complaints</title>
+    <meta name="description" content="New York City police department citizen complaint data, visualized."/>
+    <link rel="icon" href="images/NYPD_Logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--  My stylesheet  -->
+    <link href="src/map.css" rel="stylesheet" type="text/css">
+
+    <!--  Bootstrap  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+
+    <!--	JQuery	-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    
+    <!--    D3.JS   -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!--    My JS -->
+    <script src="src/info.js"></script>
+    <script src="src/general.js"></script>
+    <script src="src/mapVis.js"></script>
+</head>
+
+<body>
+
+<div class="dflex-col billboard-lg opener">
+    <div class="dflex-col py-5 px-3">
+        <div class="title mb-3">
+            <p style="color: rgb(30, 58, 104); font-size: 64px;">
+                In 2019
+            </p>
+        </div>
+        <span class="mt-4" style="font-size: 32px;">
+            There were
+            <span class="font-weight-bold" style="font-size: 32px;">
+                1,640 complaints
+            </span> of police misconduct in NYC.
+            <br>
+            These are those people's stories.
+        </span>
+    </div>
+</div>
+
+<div class="dflex-col pt-4 pb-2" id="backgroundSection">
+    <div class="title dflex-col">
+        <p style="color: rgb(30, 58, 104); font-size: 42px">
+            The Data
+        </p>
+    </div>
+
+    <div class="dflex-col m-5">
+        <span style="font-size: 22px; max-width: 980px">
+            Having witnessed decades of abuse from police officers on those they are sworn to protect, we sought out to
+            visualize the voices of those that felt abused by the justice system. To keep the officers accountable New
+            York created the Civilian Complaint Review Board (CCRB), which receives thousands of complaints each year
+            and is tasked with investigating each one. This organization has
+            <span style="font-size: 22px; font-weight: 800">
+                limited power
+            </span>, being unable to enforce requests made to police departments for relevant data on cases, as well as
+            having no power over the disciplinary measures that are taken when officers are found guilty of abuse. We
+            used the information available for the year of 2019, where in all cases, the officer in question has
+            previously been found of some misconduct and continues to serve in the NYPD. The percentages below
+            represent the distribution of ethnicities that filed formal complaints to the CCRB.
+        </span>
+    </div>
+
+    <div class="row px-4 w-100">
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #fdc086">
+                <p class="percentages">
+                    Black Percentage
+                    <br>
+                    38.0%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #beaed4">
+                <p class="percentages">
+                    White Percentage
+                    <br>
+                    19.8%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #ffff99">
+                <p class="percentages">
+                    Hispanic Percentage
+                    <br>
+                    18.6%
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row px-4 w-100">
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #386cb0">
+                <p class="percentages">
+                    Unknown Percentage
+                    <br>
+                    14.8%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #bf5b17">
+                <p class="percentages">
+                    Other Race Percentage
+                    <br>
+                    5.1%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #f0027f">
+                <p class="percentages">
+                    Asian Percentage
+                    <br>
+                    3.7%
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dflex-col m-5">
+        <span style="font-size: 22px; max-width: 980px">
+            Cases that are
+            <span style="font-size: 22px; font-weight: 800">
+                unsubstantiated
+            </span>
+            are the result of incomplete investigations, which is usually due to relevant data being withheld by the
+            NYPD, where as
+            <span style="font-size: 22px; font-weight: 800">
+                exonerated
+            </span>
+            cases find the officer in question innocent of the described allegations. When an officer is found guilty
+            of misconduct, the claims are
+            <span style="font-size: 22px; font-weight: 800">
+                substantiated
+            </span>
+            , and the CCRB suggests a punishment that is rarely upheld. Below, the percentages illustrate the amount of
+            instances for each finding.
+        </span>
+    </div>
+
+    <div class="row px-4 w-100">
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #ef8a62">
+                <p class="percentages">
+                    Substantiated Percentage
+                    <br>
+                    37.4%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #f7f7f7">
+                <p class="percentages">
+                    Unsubstantiated Percentage
+                    <br>
+                    31.4%
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 dflex-col p-3">
+            <div class="w-100 h-100 p-4" style="background-color: #67a9cf">
+                <p class="percentages">
+                    Exonerated Percentage
+                    <br>
+                    31.2%
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dflex-col m-5">
+        <span style="font-size: 22px; max-width: 980px">
+            If you are as interested as we are in seeing equality reform throughout America and the world,
+            we suggest donating to the following resources:
+        </span>
+    </div>
+
+    <div class="dflex-row mb-5">
+        <a class="dataSelection m-2" target="_blank" href="https://www.joincampaignzero.org/#vision">
+            Campaign Zero
+        </a>
+        <a class="dataSelection m-2" target="_blank" href="https://bailproject.org/">
+            Bail Fund
+        </a>
+        <a class="dataSelection m-2" target="_blank" href="https://integratenyc.org/">
+            Integrate NYC
+        </a>
+    </div>
+</div>
+
+<div id="mapSection" class="dflex-col py-2">
+    <div class="title dflex-col">
+        <p style="color: rgb(30, 58, 104); font-size: 42px">
+            New York City Map by Precinct
+        </p>
+    </div>
+
+    <div class="dflex-col m-5">
+        <span style="font-size: 22px; max-width: 980px">
+            The following is a map of New York City, which has been subdivided into the different areas that each
+            precinct covers. The size of the circles correspond to the amount of complaints in each precinct, and the
+            data can be filtered by the circles on the left, as well as changed.
+        </span>
+    </div>
+
+    <div class="row p-4" style="max-width: 960px">
+        <div class="col-md-4 dflex-col">
+            <div class="legendChange">
+                <div class="dflex-col pb-5">
+                    <h4 class="mb-2">
+                        Change Data Type
+                    </h4>
+                    <button id="race" class="dataSelection m-2 selectedData" onclick="changeData(this)">
+                        Complaints By Race
+                    </button>
+                    <button id="finding" class="dataSelection m-2" onclick="changeData(this)">
+                        Complaints By Finding
+                    </button>
+                </div>
+
+                <div id="demographicFilter">
+                    <h4 class="mb-2">
+                        Demographic Most Affected
+                    </h4>
+                    <div class="dflex-row py-2">
+                        <button id="whiteDemographic" class="demographicCircle" onclick="changeDemographic('White')">
+                            <span id="WhiteX">X</span>
+                        </button>
+                        <span style="color: #beaed4">
+                            White
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="blackDemographic" class="demographicCircle" onclick="changeDemographic('Black')">
+                            <span id="BlackX">X</span>
+                        </button>
+                        <span style="color: #fdc086">
+                            Black
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="hispanicDemographic" class="demographicCircle" onclick="changeDemographic('Hispanic')">
+                            <span id="HispanicX">X</span>
+                        </button>
+                        <span style="color: #ffff99">
+                            Hispanic
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="unknownDemographic" class="demographicCircle dflex-col" onclick="changeDemographic('Unknown')">
+                            <span id="UnknownX">X</span>
+                        </button>
+                        <span style="color: #386cb0">
+                            Unknown
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="asianDemographic" class="demographicCircle" onclick="changeDemographic('Asian')">
+                            <span id="AsianX">X</span>
+                        </button>
+                        <span style="color: #f0027f">
+                            Asian
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="otherDemographic" class="demographicCircle" onclick="changeDemographic('Other')">
+                            <span id="OtherX">X</span>
+                        </button>
+                        <span style="color: #bf5b17">
+                            Other Race
+                        </span>
+                    </div>
+                </div>
+
+                <div id="findingsFilter">
+                    <h4 class="mb-2">
+                        In Most Cases, Complaints Were
+                    </h4>
+                    <div class="dflex-row py-2">
+                        <button id="substantiatedComplaint" class="demographicCircle" onclick="changeFindings('Substantiated')">
+                            <span id="SubstantiatedX">X</span>
+                        </button>
+                        <span style="color: #ef8a62">
+                            Substantiated
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="unsubstantiatedDemographic" class="demographicCircle" onclick="changeFindings('Unsubstantiated')">
+                            <span id="UnsubstantiatedX">X</span>
+                        </button>
+                        <span style="color: #f7f7f7">
+                            Unsubstantiated
+                        </span>
+                    </div>
+                    <div class="dflex-row py-2">
+                        <button id="exoneratedDemographic" class="demographicCircle" onclick="changeFindings('Exonerated')">
+                            <span id="ExoneratedX">X</span>
+                        </button>
+                        <span style="color: #67a9cf">
+                            Exonerated
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 dflex-col">
+            <svg class="map" width="700px" height="600px">
+            </svg>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.getJSON('./src/PolicePrecincts.geojson', mapVis);
+</script>
+
+</body>
+</html>
