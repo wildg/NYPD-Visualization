@@ -45,7 +45,7 @@ p, h4 {
 }
 
 .opener {
-    background-image: url('../../images/NewYorkCity.jpg');
+    background-image: url('../images/NewYorkCity.jpg');
     background-size: cover;
     background-position: center center;
 }
